@@ -4,6 +4,7 @@ import { updateQty, removeItem, getTotalAmount } from "../features/cartSlice";
 
 const Cart = () => {
 	const item = useSelector((state) => state.cart.item);
+
 	const totalAmount = useSelector((state) => state.cart.grandTotal);
 	const dispatch = useDispatch();
 
@@ -22,6 +23,10 @@ const Cart = () => {
 	useEffect(() => {
 		handleTotalAmount();
 	});
+
+	if (item.length === 0) {
+		return <h3>Your cart is empty</h3>;
+	}
 
 	return (
 		<div>
