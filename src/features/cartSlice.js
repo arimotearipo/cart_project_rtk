@@ -19,10 +19,8 @@ const cartSlice = createSlice({
 		updateQty: (state, action) => {
 			const { id, change } = action.payload;
 			const itemIdx = state.item.findIndex((i) => i.id === id);
+			if (state.item[itemIdx].amount <= 1 && change === -1) return;
 			state.item[itemIdx].amount += change;
-			if (state.item[itemIdx].amount < 1) {
-				state.item[itemIdx].amount = 1;
-			}
 		},
 		removeItem: (state, action) => {
 			state.item = state.item.filter((i) => i.id !== action.payload);
